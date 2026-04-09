@@ -44,11 +44,13 @@
       <FileVersion>$(LibSodiumVersion).$(MinVerPatch)</FileVersion>
       <AssemblyVersion>$(FileVersion)</AssemblyVersion>
 
-      <InformationalVersion>$(LibSodiumVersion).$(MinVerPatch)</InformationalVersion>
+      <InformationalVersion>$(LibSodiumVersion)</InformationalVersion>
+      <InformationalVersion Condition=" '$(MinVerPatch)' != '' AND '$(MinVerPatch)' != '0' ">$(InformationalVersion).$(MinVerPatch)</InformationalVersion>
       <InformationalVersion Condition=" '$(MinVerPreRelease)' != '' ">$(InformationalVersion)-$(MinVerPreRelease)</InformationalVersion>
       <InformationalVersion Condition=" '$(MinVerBuildMetadata)' != '' ">$(InformationalVersion)+$(MinVerBuildMetadata)</InformationalVersion>
 
-      <PackageVersion>$(LibSodiumVersion).$(MinVerPatch)</PackageVersion>
+      <PackageVersion>$(LibSodiumVersion)</PackageVersion>
+      <PackageVersion Condition=" '$(MinVerPatch)' != '' AND '$(MinVerPatch)' != '0' ">$(PackageVersion).$(MinVerPatch)</PackageVersion>
       <PackageVersion Condition=" '$(MinVerPreRelease)' != '' ">$(PackageVersion)-$(MinVerPreRelease)</PackageVersion>
 
       <Version>$(PackageVersion)</Version>
