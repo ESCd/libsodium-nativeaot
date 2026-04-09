@@ -310,7 +310,13 @@ jobs:
 
   pack:
     needs:
-      [build-linux-emulated, build-linux-native, build-macos, build-windows]
+      [
+        build-linux-arm,
+        build-linux-musl,
+        build-linux-native,
+        build-macos,
+        build-windows,
+      ]
     runs-on: ubuntu-latest
 
     permissions:
