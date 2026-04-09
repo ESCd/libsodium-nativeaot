@@ -1,0 +1,11 @@
+<Project>
+
+  <PropertyGroup>
+    <LibSodiumDirectory>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..'))</LibSodiumDirectory>
+    <LibSodiumItemsVisible Condition=" '$(LibSodiumItemsVisible)' == '' ">false</LibSodiumItemsVisible>
+    <LibSodiumRuntimeLinking Condition=" '$(LibSodiumRuntimeLinking)' == '' ">true</LibSodiumRuntimeLinking>
+    <LibSodiumStaticLinking Condition=" '$(LibSodiumStaticLinking)' == '' ">none</LibSodiumStaticLinking>
+    <LibSodiumStaticLinking Condition=" '$(LibSodiumStaticLinking)' == 'none' AND '$(PublishAot)' == 'true' AND '$(RuntimeIdentifier)' != '' ">true</LibSodiumStaticLinking>
+  </PropertyGroup>
+
+</Project>

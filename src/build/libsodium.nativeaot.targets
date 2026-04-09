@@ -1,0 +1,41 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- NOTE: disable static linking if no runtime identifier is specified -->
+    <LibSodiumStaticLinking Condition=" '$(RuntimeIdentifier)' == '' ">false</LibSodiumStaticLinking>
+
+    <!-- NOTE: enable static linking if AOT publishing is enabled and a runtime identifier is specified -->
+    <LibSodiumStaticLinking Condition=" '$(LibSodiumStaticLinking)' == 'none' AND '$(PublishAot)' == 'true' AND '$(RuntimeIdentifier)' != '' ">true</LibSodiumStaticLinking>
+
+    <!-- NOTE: disable runtime linking if static linking is enabled -->
+    <LibSodiumRuntimeLinking Condition=" '$(LibSodiumStaticLinking)' == 'true' ">false</LibSodiumRuntimeLinking>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(LibSodiumRuntimeLinking)' == 'true' ">
+    <Content Include="$(LibSodiumDirectory)\shared\**\*.*" Visible="$(LibSodiumItemsVisible)" Condition=" '$(Configuration)' == 'Debug' OR '$(RuntimeIdentifier)' == '' ">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <Link>runtimes\%(RecursiveDir)\%(Filename)%(Extension)</Link>
+      <TargetPath>runtimes\%(RecursiveDir)\%(Filename)%(Extension)</TargetPath>
+    </Content>
+
+    <Content Include="$(LibSodiumDirectory)\shared\$(RuntimeIdentifier)\native\*.*" Visible="$(LibSodiumItemsVisible)" Condition=" '$(RuntimeIdentifier)' != '' ">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <Link>%(Filename)%(Extension)</Link>
+      <TargetPath>%(Filename)%(Extension)</TargetPath>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(LibSodiumStaticLinking)' == 'true' AND '$(RuntimeIdentifier)' != '' ">
+    <DirectPInvoke Include="sodium;libsodium" />
+
+    <NativeLibrary Include="$(LibSodiumDirectory)\static\$(RuntimeIdentifier)\native\*.*" />
+  </ItemGroup>
+
+  <Target Name="_PrepareLibSodiumBuild" AfterTargets="PrepareForBuild">
+    <Error Text="A RuntimeIdentifier must be specified when static linking is enabled." Condition=" '$(LibSodiumStaticLinking)' == 'true' AND '$(RuntimeIdentifier)' == '' " />
+    <Warning Text="LibSodiumRuntimeLinking=true: runtime linking should not be enabled when static linking is enabled." Condition=" '$(LibSodiumRuntimeLinking)' == 'true' AND '$(LibSodiumStaticLinking)' == 'true' " />
+  </Target>
+
+</Project>

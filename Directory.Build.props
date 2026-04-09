@@ -1,0 +1,70 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- Create a property to easily reference the root of the `src` folder -->
+    <SolutionRootDirectory>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))</SolutionRootDirectory>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+    <DefaultItemExcludesInProjectFolder>$(DefaultItemExcludesInProjectFolder);packages.lock.json;package.json;package-lock.json</DefaultItemExcludesInProjectFolder>
+    <Deterministic>true</Deterministic>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
+    <Features>strict</Features>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GenerateSBOM Condition=" '$(Configuration)' == 'Release' ">true</GenerateSBOM>
+    <ImplicitUsings>true</ImplicitUsings>
+    <IncludeSymbols>true</IncludeSymbols>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <NoWarn>$(NoWarn);CS8618</NoWarn>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+
+    <!-- Disable legacy analyzers and enable NET/Roslyn analyzers -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <RunAnalyzers>true</RunAnalyzers>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+  </PropertyGroup>
+
+  <!-- libsodium version -->
+  <PropertyGroup>
+    <LibSodiumVersion Condition=" '$(LibSodiumVersion)' == '' ">1.0.21</LibSodiumVersion>
+  </PropertyGroup>
+
+  <!-- Git Versioning + Metadata -->
+  <PropertyGroup>
+    <MinVerDefaultPreReleaseIdentifiers>rc</MinVerDefaultPreReleaseIdentifiers>
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <!-- NuGet/AssemblyInfo -->
+  <PropertyGroup>
+    <Authors>Samuel Steele</Authors>
+    <Copyright>$([System.DateTime]::Now.Year) Escape Developers, LLC</Copyright>
+    <PackageId>$(AssemblyName)</PackageId>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/ESCd/libsodium-nativeaot/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ESCd/libsodium-nativeaot.git</RepositoryUrl>
+    <Title>$(AssemblyName)</Title>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MinVer" Version="7.0.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Sbom.Targets" Version="4.1.5" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.201" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="System.Collections" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(GITHUB_ACTIONS)' == 'true' ">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+</Project>
