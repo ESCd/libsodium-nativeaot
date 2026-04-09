@@ -40,7 +40,7 @@ jobs:
       - name: download source
         run: |
           curl -fsSL "https://github.com/jedisct1/libsodium/releases/download/${{ env.SODIUM_VERSION }}-RELEASE/libsodium-${{ env.SODIUM_VERSION }}.tar.gz" -o libsodium.tar.gz
-          echo "${{ env.SODIUM_CHECKSUM }}  libsodium.tar.gz" | sha256sum -c
+          echo "${{ env.SODIUM_CHECKSUM }}  libsodium.tar.gz" | shasum -a 256 --check
           tar -xzf libsodium.tar.gz
           mv libsodium-${{ env.SODIUM_VERSION }} sodium-src
 
@@ -82,7 +82,7 @@ jobs:
       - name: download source
         run: |
           curl -fsSL "https://github.com/jedisct1/libsodium/releases/download/${{ env.SODIUM_VERSION }}-RELEASE/libsodium-${{ env.SODIUM_VERSION }}.tar.gz" -o libsodium.tar.gz
-          echo "${{ env.SODIUM_CHECKSUM }}  libsodium.tar.gz" | sha256sum -c
+          echo "${{ env.SODIUM_CHECKSUM }}  libsodium.tar.gz" | shasum -a 256 --check
           tar -xzf libsodium.tar.gz
           mv libsodium-${{ env.SODIUM_VERSION }} sodium-src
 
@@ -150,7 +150,7 @@ jobs:
       - name: download source
         run: |
           curl -fsSL "https://github.com/jedisct1/libsodium/releases/download/${{ env.SODIUM_VERSION }}-RELEASE/libsodium-${{ env.SODIUM_VERSION }}.tar.gz" -o libsodium.tar.gz
-          echo "${{ env.SODIUM_CHECKSUM }}  libsodium.tar.gz" | sha256sum -c
+          echo "${{ env.SODIUM_CHECKSUM }}  libsodium.tar.gz" | shasum -a 256 --check
           tar -xzf libsodium.tar.gz
           mv libsodium-${{ env.SODIUM_VERSION }} sodium-src
 
@@ -204,7 +204,7 @@ jobs:
       - name: download source
         run: |
           curl -fsSL "https://github.com/jedisct1/libsodium/releases/download/${{ env.SODIUM_VERSION }}-RELEASE/libsodium-${{ env.SODIUM_VERSION }}.tar.gz" -o libsodium.tar.gz
-          echo "${{ env.SODIUM_CHECKSUM }}  libsodium.tar.gz" | sha256sum -c
+          echo "${{ env.SODIUM_CHECKSUM }}  libsodium.tar.gz" | shasum -a 256 --check
           tar -xzf libsodium.tar.gz
           mv libsodium-${{ env.SODIUM_VERSION }} sodium-src
 
