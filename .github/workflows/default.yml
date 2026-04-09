@@ -50,7 +50,6 @@ jobs:
         with:
           repository: jedisct1/libsodium
           ref: ${{ env.LIBSODIUM_VERSION }}-RELEASE
-          persist-credentials: false
 
       - name: setup zig
         uses: mlugg/setup-zig@v2
@@ -79,7 +78,6 @@ jobs:
         with:
           repository: jedisct1/libsodium
           ref: ${{ env.LIBSODIUM_VERSION }}-RELEASE
-          persist-credentials: false
 
       - name: setup zig
         uses: mlugg/setup-zig@v2
@@ -134,7 +132,6 @@ jobs:
         with:
           repository: jedisct1/libsodium
           ref: ${{ env.LIBSODIUM_VERSION }}-RELEASE
-          persist-credentials: false
 
       - name: build (shared + static)
         shell: cmd
