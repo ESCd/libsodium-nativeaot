@@ -44,7 +44,7 @@ jobs:
 
     steps:
       - name: checkout libsodium
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: jedisct1/libsodium
           ref: ${{ env.SODIUM_VERSION }}-RELEASE
@@ -78,7 +78,7 @@ jobs:
 
     steps:
       - name: checkout libsodium
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: jedisct1/libsodium
           ref: ${{ env.SODIUM_VERSION }}-RELEASE
@@ -133,7 +133,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: checkout libsodium
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: jedisct1/libsodium
           ref: ${{ env.SODIUM_VERSION }}-RELEASE
@@ -180,7 +180,7 @@ jobs:
 
     steps:
       - name: checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           fetch-tags: true
@@ -248,7 +248,7 @@ jobs:
 
     steps:
       - name: checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 
